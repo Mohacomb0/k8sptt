@@ -43,7 +43,7 @@ const TOPOLOGIES = {
   traffic: {
     nodes: [
       node('browser', 'browser', 'Usuario', 'HTTPS', -8.5, -4.5),
-      node('ingress', 'cdn', 'Ingress', 'controlador HTTP', -4, -4.5),
+      node('ingress', 'ingress', 'Ingress', 'controlador HTTP', -4, -4.5),
       service,
       ...workers,
     ],

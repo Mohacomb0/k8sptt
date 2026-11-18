@@ -3,7 +3,6 @@ import {
   CASES,
   caseFrame,
   isDemoAdvanceShortcut,
-  legacyLaboratoryUrl,
   nextIndex,
   presenterState,
   slideIndex,
@@ -37,25 +36,6 @@ describe('navegación de la presentación', () => {
     });
     expect(presenterState(SLIDES, SLIDES.length - 1).nextTitle).toBeUndefined();
     expect(() => presenterState(SLIDES, SLIDES.length)).toThrow('Diapositiva desconocida');
-  });
-
-  it('redirige enlaces históricos al laboratorio sin perder parámetros ni fragmentos', () => {
-    expect(
-      legacyLaboratoryUrl({
-        pathname: '/',
-        search: '?escenario=cors&detalle=a%20b',
-        hash: '#paso-2',
-      }),
-    ).toBe('/laboratorio.html?escenario=cors&detalle=a%20b#paso-2');
-    expect(
-      legacyLaboratoryUrl({
-        pathname: '/request-journey/index.html',
-        search: '?escenario=cors',
-        hash: '#pipeline',
-      }),
-    ).toBe('/request-journey/laboratorio.html?escenario=cors#pipeline');
-    expect(legacyLaboratoryUrl({ pathname: '/', hash: '#pipeline' })).toBeNull();
-    expect(legacyLaboratoryUrl({ pathname: '/laboratorio.html', search: '?escenario=cors' })).toBeNull();
   });
 });
 

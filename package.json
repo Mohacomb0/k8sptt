@@ -19,7 +19,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "lucide": "^1.52.0",
     "three": "^0.186.1"
   },
   "devDependencies": {

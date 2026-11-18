@@ -10,7 +10,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         presentation: 'index.html',
-        laboratorio: 'laboratorio.html',
         presenter: 'presenter.html',
       },
     },

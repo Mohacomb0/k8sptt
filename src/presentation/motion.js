@@ -83,9 +83,9 @@ export function motionPlan({ visual, scenario, frame }, cycle) {
     return {
       label: 'API ↔ kubelet · reconciliación',
       detail: 'Ámbar: intercambio lógico de estado. El kubelet consulta la API e informa; no es tráfico de usuarios.',
-      tone: 'dns',
+      tone: 'control',
       focus: [target],
-      tracks: [[hop(target, 'control', 'dns'), hop('control', target, 'dns')]],
+      tracks: [[hop(target, 'control', 'control'), hop('control', target, 'control')]],
     };
   }
 
@@ -107,13 +107,13 @@ export function motionPlan({ visual, scenario, frame }, cycle) {
         label: 'Estado deseado → API',
         detail: 'La fase de despliegue declara la versión que se quiere ejecutar.',
         paths: [['jenkins', 'control']],
-        tone: 'dns',
+        tone: 'control',
       },
       {
         label: 'Asignación y ejecución',
         detail: 'Relación lógica: scheduler asigna; kubelet y runtime ejecutan.',
         paths: workers.map((id) => ['control', id]),
-        tone: 'dns',
+        tone: 'control',
       },
       {
         label: 'Los nodos obtienen la imagen',

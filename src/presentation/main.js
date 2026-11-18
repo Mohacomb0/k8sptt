@@ -1,19 +1,8 @@
 import './presentation.css';
 import { SLIDES } from './slides.js';
-import {
-  CASES,
-  caseFrame,
-  isDemoAdvanceShortcut,
-  legacyLaboratoryUrl,
-  nextIndex,
-  presenterState,
-  slideIndex,
-} from './model.js';
+import { CASES, caseFrame, isDemoAdvanceShortcut, nextIndex, presenterState, slideIndex } from './model.js';
 import { MotionPlayer } from './MotionPlayer.js';
 import { motionPlan } from './motion.js';
-
-const laboratoryUrl = legacyLaboratoryUrl(location);
-if (laboratoryUrl) location.replace(laboratoryUrl);
 
 const $ = (id) => document.getElementById(id);
 let index = slideIndex(location.hash, SLIDES);
@@ -348,7 +337,5 @@ async function initScene() {
   }
 }
 
-if (!laboratoryUrl) {
-  render();
-  initScene();
-}
+render();
+initScene();

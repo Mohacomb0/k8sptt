@@ -427,13 +427,13 @@ export const SLIDES = [
     description:
       'Jenkins automatiza. El registry conserva el artefacto. Kubernetes reconcilia. Las señales nos permiten comprobar.',
     content:
-      '<div class="closing-list"><span>01 <strong>Una versión trazable.</strong></span><span>02 <strong>Un despliegue verificable.</strong></span><span>03 <strong>Un diagnóstico seguro.</strong></span></div><a class="lab-link" href="./laboratorio.html" target="_blank" rel="noopener">Abrir laboratorio original de peticiones 3D ↗</a>',
+      '<div class="closing-list"><span>01 <strong>Una versión trazable.</strong></span><span>02 <strong>Un despliegue verificable.</strong></span><span>03 <strong>Un diagnóstico seguro.</strong></span></div>',
     takeaway: 'No necesitamos saberlo todo de Kubernetes para empezar; sí saber qué mirar y cuándo pedir ayuda.',
     source: 'Base principal: intro_nodos_kubernetes_grupmed.pdf · Material ampliado para onboarding del equipo.',
     visual: 'pipeline',
     visualTitle: 'DEL CÓDIGO AL CLÚSTER',
     notes:
-      'Cerrar confirmando los pendientes operativos: URLs autorizadas, acceso al Jenkins y registry, namespaces por equipo, pipeline real, dashboard, fuentes de Grafana, retención de logs y procedimiento de rollback. El laboratorio original explica una arquitectura AWS: no representa nuestra infraestructura Kubernetes.',
+      'Cerrar confirmando los pendientes operativos: URLs autorizadas, acceso al Jenkins y registry, namespaces por equipo, pipeline real, dashboard, fuentes de Grafana, retención de logs y procedimiento de rollback.',
   },
   {
     id: 'referencias',
@@ -449,6 +449,6 @@ export const SLIDES = [
     visual: 'observe',
     visualTitle: 'DOCUMENTACIÓN Y SIGUIENTES PASOS',
     notes:
-      'El repositorio original es Request Journey 3D, de arnaucanet, licencia MIT. Se reutilizan sus modelos low-poly, motor de escena y animador de paquetes; el laboratorio se conserva sin alterar su simulador.',
+      'Los modelos low-poly, el motor de escena y el animador de paquetes proceden de Request Journey 3D, de arnaucanet, licencia MIT. La presentación y sus recorridos están adaptados a DevOps y Kubernetes.',
   },
 ];

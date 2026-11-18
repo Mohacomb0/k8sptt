@@ -3,11 +3,11 @@ import { CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { PACKET_COLORS } from './theme.js';
 
 const geometry = new THREE.SphereGeometry(0.17, 16, 12);
-const STREAM_GAP = 0.07; // segundos entre consultas de una ráfaga (N+1)
+const STREAM_GAP = 0.07; // segundos entre consultas de una ráfaga
 
-// Anima los hops que ha calculado el simulador: un paquete por tramo, viajando por su cable.
+// Anima recorridos: un paquete por tramo, viajando por su cable.
 // play(tracks) recibe varias pistas; cada pista se anima en orden y las pistas a la vez
-// (por ejemplo el JS y el CSS, que el navegador descarga en paralelo).
+// (por ejemplo la descarga de una imagen por varios workers).
 export class PacketAnimator {
   constructor(sceneManager, view) {
     this.scene = sceneManager.scene;
@@ -62,7 +62,7 @@ export class PacketAnimator {
     return generation === this.generation;
   }
 
-  // Ráfaga de consultas (N+1): salen escalonadas y cada respuesta vuelve en cuanto llega su consulta
+  // Las consultas salen escalonadas; cada respuesta vuelve al llegar su consulta
   #playStream(hops, generation) {
     const pairs = [];
     for (let k = 0; k < hops.length; k += 2) pairs.push(hops.slice(k, k + 2));

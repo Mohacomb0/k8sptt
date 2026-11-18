@@ -22,11 +22,6 @@ export function presenterState(slides, index) {
   };
 }
 
-export function legacyLaboratoryUrl({ pathname, search = '', hash = '' }) {
-  if (!new URLSearchParams(search).has('escenario') || !/(?:\/|\/index\.html)$/.test(pathname)) return null;
-  return `${pathname.replace(/(?:index\.html)?$/, 'laboratorio.html')}${search}${hash}`;
-}
-
 export function isDemoAdvanceShortcut(event, { hasScenario, interactive = false, dialogOpen = false }) {
   return (
     event.key === ' ' &&

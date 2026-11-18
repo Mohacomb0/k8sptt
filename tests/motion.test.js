@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { MotionPlayer } from '../src/presentation/MotionPlayer.js';
 import { motionPlan } from '../src/presentation/motion.js';
 import { CASES } from '../src/presentation/model.js';
+import { PACKET_COLORS } from '../src/scene/theme.js';
 
 const context = (visual, frame, scenario) => ({ visual, frame, scenario });
 const flush = async () => {
@@ -31,6 +32,22 @@ function playerHarness() {
 }
 
 describe('flujos didácticos', () => {
+  it('representa la reconciliación como control y evita el worker caído', () => {
+    const plan = motionPlan(context('cluster', CASES.node[3]), 0);
+    expect(plan.tone).toBe('control');
+    expect(plan.tracks[0]).toMatchObject([
+      { from: 'worker2', to: 'control', kind: 'control' },
+      { from: 'control', to: 'worker2', kind: 'control' },
+    ]);
+    for (const visual of ['pipeline', 'cluster', 'observe', 'traffic']) {
+      for (let cycle = 0; cycle < 5; cycle++) {
+        const flow = motionPlan(context(visual, CASES.traffic[0]), cycle);
+        expect(PACKET_COLORS[flow.tone]).toBeDefined();
+        for (const hop of flow.tracks.flat()) expect(PACKET_COLORS[hop.kind]).toBeDefined();
+      }
+    }
+  });
+
   it('alterna las réplicas Ready y devuelve la respuesta por el camino inverso', () => {
     const first = motionPlan(context('traffic', CASES.traffic[0]), 0).tracks[0];
     const second = motionPlan(context('traffic', CASES.traffic[0]), 1).tracks[0];
