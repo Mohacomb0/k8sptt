@@ -37,13 +37,16 @@ function currentFrame() {
     : {
         title: slide.visualTitle,
         text:
-          slide.visual === 'observe'
+          slide.visualDescription ??
+          (slide.visual === 'observe'
             ? 'Relaciones conceptuales. Métricas requieren instrumentación/exporters; logs centralizados requieren un recolector y un backend.'
-            : 'Esquema ilustrativo: dos workers, no la topología real ni la escala del inventario.',
-        pods: [
-          { label: 'api · v1', node: 'worker1', state: 'ready' },
-          { label: 'api · v1', node: 'worker2', state: 'ready' },
-        ],
+            : 'Esquema ilustrativo: dos workers, no la topología real ni la escala del inventario.'),
+        pods: slide.diagram
+          ? []
+          : [
+              { label: 'api · v1', node: 'worker1', state: 'ready' },
+              { label: 'api · v1', node: 'worker2', state: 'ready' },
+            ],
       };
 }
 
@@ -58,7 +61,7 @@ function renderFrame(animate = false) {
   $('scenario-next').textContent = frames && step === frames.length - 1 ? 'Demo completada ✓' : 'Siguiente paso →';
   $('scenario-next').title = 'Avanzar demo: Espacio (fuera de botones, enlaces y campos)';
   $('scenario-next').disabled = busy || !frames || step === frames.length - 1;
-  view?.setFrame(frame);
+  if (!slide.diagram) view?.setFrame(frame);
   if (!animate || !animator || reducedMotion) return;
   const paths = frame.paths ?? (frame.path ? [frame.path] : []);
   if (!paths.length) return;
@@ -88,6 +91,13 @@ function render() {
   motion?.stop();
   animator?.cancel();
   const slide = SLIDES[index];
+  const hasDiagram = Boolean(slide.diagram);
+  document.querySelector('.visual-panel').classList.toggle('has-foundation', hasDiagram);
+  $('foundation-diagram').hidden = !hasDiagram;
+  $('foundation-diagram').innerHTML = slide.diagram ?? '';
+  $('kube-viewport').setAttribute('aria-hidden', String(hasDiagram));
+  document.querySelector('.motion-controls').hidden = hasDiagram || !motion;
+  document.querySelector('.orbit-hint').hidden = hasDiagram;
   document.title = `${slide.title.replace('\n', ' ')} · GrupMed`;
   $('chapter-number').textContent = String(chapters.indexOf(slide.chapter) + 1).padStart(2, '0');
   $('chapter').textContent = slide.chapter;
@@ -110,7 +120,7 @@ function render() {
       if (i === index) link.setAttribute('aria-current', 'step');
       else link.removeAttribute('aria-current');
     });
-  view?.setTopology(slide.visual);
+  if (!hasDiagram) view?.setTopology(slide.visual);
   renderFrame();
   document.querySelector('.slide-copy').scrollTop = 0;
   syncPresenter();
@@ -139,7 +149,7 @@ function toggleNotes() {
 
 function renderMotionControls() {
   const state = motion?.state ?? 'idle';
-  const available = Boolean(motion) && !busy && !reducedMotion;
+  const available = Boolean(motion) && !SLIDES[index].diagram && !busy && !reducedMotion;
   const playing = state === 'playing';
   $('motion-toggle').disabled = !available;
   $('motion-once').disabled = !available || playing;

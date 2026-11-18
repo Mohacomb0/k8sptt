@@ -1,3 +1,5 @@
+import { FOUNDATION_DIAGRAMS } from './foundations.js';
+
 const cards = (...items) =>
   `<div class="cards">${items.map(([title, text]) => `<article class="info-card"><h2>${title}</h2><p>${text}</p></article>`).join('')}</div>`;
 const commands = (text) =>
@@ -26,18 +28,107 @@ export const SLIDES = [
     chapter: 'El punto de partida',
     kicker: 'OBJETIVOS DE LA SESIÓN',
     title: 'Tres preguntas.\nUn recorrido.',
-    description: 'Primero el modelo mental. Después el flujo de entrega. Por último, cómo observar y diagnosticar.',
+    description: 'Primero, la evolución de la infraestructura. Después, el flujo de entrega y el diagnóstico.',
     content: cards(
-      ['01 · ¿Dónde se ejecuta?', 'Clúster, nodos, pods y estado deseado.'],
+      ['01 · ¿Dónde se ejecuta?', 'Del servidor físico a las VM, los contenedores y el clúster.'],
       ['02 · ¿Cómo llega?', 'Git → Jenkins → registry → despliegue.'],
       ['03 · ¿Cómo lo entendemos?', 'Dashboard, métricas, eventos y logs.'],
     ),
     takeaway: 'Un despliegue no termina al publicar una imagen: termina al comprobar que funciona.',
-    source: 'PDF · págs. 2–4 y 8–12. Ampliación: flujo CI/CD y observabilidad.',
+    source: 'PDF principal · págs. 2–4 y 8–12. Apertura complementaria: de Bare Metal a Kubernetes.',
     visual: 'pipeline',
     visualTitle: 'CÓDIGO → ARTEFACTO → EJECUCIÓN',
     notes:
-      'La sesión sirve tanto para leer una arquitectura como para trabajar con ella. Los escenarios son simulaciones locales, no consultas al clúster real.',
+      'Dar paso al compañero para la apertura: servidor físico → VM → contenedor → orquestación. Retomar después con el modelo mental de Kubernetes y el recorrido de entrega. Los escenarios son simulaciones locales, no consultas al clúster real.',
+  },
+  {
+    id: 'servidores-fisicos',
+    chapter: 'De servidores a Kubernetes',
+    kicker: '01 · SERVIDORES FÍSICOS',
+    title: 'La aplicación\nen el servidor.',
+    description:
+      'Para poner una aplicación en marcha, preparamos el servidor, su sistema operativo y sus dependencias.',
+    content: cards(
+      ['Qué gestionamos', 'Hardware, sistema operativo, paquetes, certificados y aplicación.'],
+      ['El reto', 'Reproducir el entorno y aprovechar la capacidad sin mezclar dependencias.'],
+      ['El siguiente paso', 'Crear varios entornos independientes sobre una misma máquina física.'],
+    ),
+    takeaway: 'No basta con copiar el código: la aplicación necesita un entorno preparado.',
+    source: 'Guion «De Bare Metal a Kubernetes» · págs. 2 y 4.',
+    visual: 'layers',
+    diagram: FOUNDATION_DIAGRAMS.baremetal,
+    visualTitle: 'APLICACIÓN → SISTEMA → HARDWARE',
+    visualDescription: 'En bare metal, el sistema operativo se ejecuta directamente sobre el hardware.',
+    notes:
+      'Apertura del compañero. Usar el ejemplo del guion: una web PHP funciona en pruebas, pero en el servidor nuevo falta una extensión. Preguntar qué debemos preparar además del código. El esquema no implica que solo pueda ejecutarse una aplicación por servidor; ilustra las capas que administramos.',
+  },
+  {
+    id: 'maquinas-virtuales',
+    chapter: 'De servidores a Kubernetes',
+    kicker: '02 · MÁQUINAS VIRTUALES',
+    title: 'Virtualizar\nel hardware.',
+    description: 'Un hipervisor permite ejecutar varias máquinas virtuales sobre un servidor físico.',
+    content: cards(
+      ['Qué aporta', 'Consolidación de recursos y aislamiento entre sistemas invitados.'],
+      ['Qué conserva cada VM', 'Su sistema operativo, aplicaciones y dependencias.'],
+      ['Qué seguimos manteniendo', 'Actualizaciones, configuración y seguridad de cada sistema operativo.'],
+    ),
+    takeaway: 'Reducimos servidores físicos, no necesariamente sistemas operativos que mantener.',
+    source: 'Guion «De Bare Metal a Kubernetes» · págs. 5–6.',
+    visual: 'layers',
+    diagram: FOUNDATION_DIAGRAMS.vms,
+    visualTitle: 'UNA BASE FÍSICA · VARIOS ENTORNOS',
+    visualDescription: 'Cada VM dispone de su propio sistema operativo y kernel; el hardware se comparte.',
+    notes:
+      'Continuar con la consolidación: varios servicios pueden pasar de servidores infrautilizados a VM sobre menos máquinas físicas. El hipervisor virtualiza recursos de hardware. No entrar en sus variantes; destacar que cada VM mantiene su sistema invitado. VM y contenedores no son alternativas excluyentes.',
+  },
+  {
+    id: 'contenedores',
+    chapter: 'De servidores a Kubernetes',
+    kicker: '03 · CONTENEDORES',
+    title: 'Empaquetar\nla aplicación.',
+    description:
+      'La imagen reúne código y dependencias. El contenedor es una instancia aislada que comparte el kernel del host.',
+    content:
+      tags('Dockerfile → Imagen → Contenedor') +
+      cards(
+        ['Un artefacto entre entornos', 'Construir, probar y promover la misma imagen, con la configuración separada.'],
+        ['Datos independientes', 'Persistencia y copias requieren una gestión separada del contenedor.'],
+      ),
+    takeaway: 'VM: hardware virtualizado. Contenedor: procesos aislados sobre un kernel compartido.',
+    source: 'Guion «De Bare Metal a Kubernetes» · págs. 6 y 8–11.',
+    visual: 'layers',
+    diagram: FOUNDATION_DIAGRAMS.containers,
+    visualTitle: 'APLICACIONES AISLADAS · KERNEL COMPARTIDO',
+    visualDescription: 'La imagen no incluye un kernel propio. El host puede ser una máquina física o una VM.',
+    notes:
+      'Distinguir Dockerfile, imagen y contenedor: instrucciones de construcción, artefacto y ejecución. Para cambiar la aplicación, reconstruir y sustituir; no editar el contenedor a mano. Los contenedores Linux comparten el kernel del host Linux; Docker Desktop puede usar una VM en Windows o macOS. Una imagen no elimina diferencias de configuración, arquitectura o datos. Un volumen no sustituye a una copia de seguridad.',
+  },
+  {
+    id: 'por-que-kubernetes',
+    chapter: 'De servidores a Kubernetes',
+    kicker: '04 · ORQUESTACIÓN',
+    title: 'Del contenedor\nal conjunto.',
+    description: 'Al operar varios nodos, necesitamos coordinar ubicación, réplicas y actualizaciones.',
+    content: cards(
+      [
+        'Un host · Docker Compose',
+        'Describe y ejecuta varios servicios; no los reubica por sí solo si se pierde el host.',
+      ],
+      ['Varios nodos · Kubernetes', 'Declaramos el estado deseado y sus controladores coordinan la ejecución.'],
+      [
+        'Condiciones de recuperación',
+        'Se necesitan capacidad, red y almacenamiento adecuados; no es una garantía automática.',
+      ],
+    ),
+    takeaway: 'Kubernetes añade orquestación. Sus nodos pueden ser máquinas físicas o virtuales.',
+    source: 'Guion «De Bare Metal a Kubernetes» · págs. 14–17 y 22.',
+    visual: 'cluster',
+    visualTitle: 'COORDINAR EL ESTADO DESEADO',
+    visualDescription:
+      'El plano de control coordina; los nodos ejecutan. La recuperación depende del diseño y los recursos.',
+    notes:
+      'Cerrar la intervención del compañero: Compose resulta adecuado para muchos casos en un host. Kubernetes aporta coordinación multinodo, con un coste operativo que debe justificarse. No es una migración obligatoria ni reemplaza las VM. No exige Docker Engine en los nodos: utiliza runtimes compatibles. Dar paso al recorrido de Kubernetes, Jenkins, registry y observabilidad; no incorporar las demos ejecutables ni los anexos del guion a esta apertura.',
   },
   {
     id: 'origen',

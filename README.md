@@ -6,7 +6,9 @@ Presentación interactiva de la **Unitat de Recursos d’Informàtica de Gestió
 
 ## Contenido
 
-23 diapositivas en español para explicar el recorrido **Git → Jenkins → registry → Kubernetes → observabilidad**, con cinco casos guiados:
+27 diapositivas en español. Tras la portada y los objetivos, cuatro diapositivas introducen **servidores físicos → máquinas virtuales → contenedores → orquestación con Kubernetes**, con esquemas de capas y notas para la intervención inicial del compañero.
+
+El recorrido continúa con **Git → Jenkins → registry → Kubernetes → observabilidad** y cinco casos guiados:
 
 - Construcción, publicación y despliegue de una versión.
 - Tráfico de una aplicación: Ingress, Service y pods Ready.
@@ -16,7 +18,7 @@ Presentación interactiva de la **Unitat de Recursos d’Informàtica de Gestió
 
 Los diagramas 3D muestran tráfico, actividad y estados de pods. El contenido distingue métricas con Prometheus, visualización con Grafana y logs centralizados con un backend como Loki.
 
-La base de la sesión es `intro_nodos_kubernetes_grupmed.pdf`. **Esta versión pública no incluye el PDF, nombres de máquinas, versiones ni cifras del inventario interno.** No se conecta a Jenkins, al clúster ni a las herramientas de observabilidad. Las URLs, accesos, namespaces, fuentes y procedimientos reales deben confirmarse con sistemas.
+La base de la sesión es `intro_nodos_kubernetes_grupmed.pdf`. La apertura sintetiza el guion `Xerrada_Docker_Kubernetes_Guio_Visual_Editable.pdf`, sin incorporar sus demos ejecutables ni anexos. **Esta versión pública no incluye los PDF, nombres de máquinas, versiones ni cifras del inventario interno.** No se conecta a Jenkins, al clúster ni a las herramientas de observabilidad. Las URLs, accesos, namespaces, fuentes y procedimientos reales deben confirmarse con sistemas.
 
 ## Uso local
 
