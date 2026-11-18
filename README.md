@@ -78,8 +78,6 @@ tests/                   Pruebas de navegación, escenarios y movimiento
 | `npm run build`        | Generar la web en `dist/`              |
 | `npm run preview`      | Revisar el build localmente            |
 
-## Atribución y licencia
+## Licencia
 
-Los modelos low-poly, el motor de escena y el animador de paquetes se adaptan de [Request Journey 3D](https://github.com/arnaucanet/request-journey), de arnaucanet. Se reutiliza su base visual, no su aplicación ni sus escenarios originales.
-
-Se conserva la [licencia MIT y su atribución](LICENSE).
+Los componentes visuales se distribuyen bajo licencia MIT. El aviso de copyright y las condiciones se conservan en [LICENSE](LICENSE).

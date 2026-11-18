@@ -9,7 +9,7 @@ const workers = [
   node('worker2', 'server', 'Worker 02', 'kubelet + runtime', 5, 3.2),
 ];
 const control = node('control', 'balancer', 'Control plane', 'API · scheduler · controllers', 1, -4.5);
-const registry = node('registry', 'database', 'Registry', 'images · tags · digests', -7.5, -4.5);
+const registry = node('registry', 'database', 'Registry', 'imágenes · tags · digests', -7.5, -4.5);
 const service = node('service', 'balancer', 'Service', 'endpoints de pods Ready', 1, -1.5);
 
 const TOPOLOGIES = {
@@ -17,7 +17,7 @@ const TOPOLOGIES = {
     nodes: [
       node('git', 'browser', 'Git', 'código fuente', -9, -4.5),
       node('jenkins', 'server', 'Jenkins', 'test · build · deploy', -3.5, -4.5),
-      node('registry', 'database', 'Registry', 'images versionadas', 2, -4.5),
+      node('registry', 'database', 'Registry', 'imágenes versionadas', 2, -4.5),
       node('control', 'balancer', 'API Kubernetes', 'estado deseado', 8, -4.5),
       ...workers,
     ],

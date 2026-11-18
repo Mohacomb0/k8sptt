@@ -162,7 +162,7 @@ function renderMotionControls() {
   $('motion-signal').textContent = playing ? 'EN MOVIMIENTO' : state === 'paused' ? 'EN PAUSA' : 'RECORRIDO COMPLETADO';
   $('motion-hint').textContent = reducedMotion
     ? 'Movimiento desactivado: preferencia de accesibilidad del sistema.'
-    : 'Tráfico, luces y señales · tú marcas el ritmo';
+    : 'Animación del flujo · control interactivo';
 }
 
 function openIndex() {

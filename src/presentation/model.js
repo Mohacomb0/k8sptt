@@ -75,14 +75,14 @@ export const CASES = {
     },
     {
       title: 'Readiness habilita el tráfico',
-      text: 'Los pods pasan a Ready. El Service puede enviarlos a sus endpoints; Jenkins no atiende las peticiones de los usuarios.',
+      text: 'Los pods pasan a Ready. El Service puede dirigir el tráfico a sus endpoints; Jenkins no atiende las peticiones de los usuarios.',
       pods: [pod('api · v2', 'worker1'), pod('api · v2', 'worker2')],
     },
   ],
   traffic: [
     {
       title: 'El usuario hace una petición',
-      text: 'Ejemplo HTTP con Ingress. Su controlador debe estar instalado y configurado; no aparece por crear un clúster.',
+      text: 'Ejemplo HTTP con Ingress. Su controlador debe estar instalado y configurado para aplicar las reglas.',
       pods: initialPods(),
     },
     {
@@ -183,7 +183,7 @@ export const CASES = {
     },
     {
       title: 'Corregimos la causa mediante el flujo acordado',
-      text: 'Tras corregir la referencia en Git y desplegar una imagen accesible, el nuevo pod puede arrancar. Reiniciar por reflejo no arregla un tag inexistente.',
+      text: 'Tras corregir la referencia en Git y desplegar una imagen accesible, el nuevo pod puede arrancar. Un reinicio no corrige una etiqueta inexistente.',
       pods: [pod('api · v2', 'worker1')],
     },
   ],
