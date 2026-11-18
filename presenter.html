@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Vista del ponente · GrupMed</title>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./index.html">
+        Unitat de Recursos d’Informàtica de Gestió GrupMed
+        <span>VISTA DEL PONENTE</span>
+      </a>
+      <div class="timer" aria-label="Tiempo de presentación">
+        <span id="elapsed" aria-live="off">00:00</span>
+        <button id="timer-toggle" aria-pressed="false">Pausar tiempo</button>
+        <button id="timer-reset">Reiniciar</button>
+      </div>
+    </header>
+    <main>
+      <p class="eyebrow"><span id="slide-count">—</span><span id="chapter">Esperando a la presentación</span></p>
+      <h1 id="current-title">Abre esta ventana desde la presentación</h1>
+      <section class="notes">
+        <h2>Notas del ponente</h2>
+        <p id="speaker-notes">Las notas aparecerán aquí y se actualizarán al cambiar de diapositiva.</p>
+      </section>
+      <section class="next">
+        <span>DESPUÉS</span>
+        <strong id="next-title">—</strong>
+      </section>
+    </main>
+    <footer>Arrastra esta ventana a tu pantalla. La proyección principal permanece limpia.</footer>
+    <p id="connection-status" role="status">Conectando con la presentación…</p>
+    <script type="module" src="/src/presentation/presenter.js"></script>
+  </body>
+</html>

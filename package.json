@@ -1,0 +1,33 @@
+{
+  "name": "k8sptt",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Presentación interactiva de Kubernetes para la Unitat de Recursos d’Informàtica de Gestió GrupMed.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "lucide": "^1.52.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}

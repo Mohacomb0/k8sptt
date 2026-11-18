@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Del código al clúster: una introducción visual a Kubernetes para la Unitat de Recursos d’Informàtica de Gestió GrupMed."
+    />
+    <title>GrupMed · Del código al clúster</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./">
+        <span class="brand-symbol" aria-hidden="true">✳</span>
+        <span>Unitat de Recursos d’Informàtica de Gestió GrupMed</span>
+      </a>
+      <span class="session-label">SESIÓN TÉCNICA <span>01</span></span>
+      <div class="top-actions">
+        <button id="contents" aria-haspopup="dialog" aria-controls="index-dialog">Índice <kbd>I</kbd></button>
+        <button id="presenter-view">Vista ponente</button>
+        <button id="notes-toggle" aria-pressed="false" aria-controls="speaker-notes">Notas <kbd>N</kbd></button>
+        <button id="fullscreen" aria-label="Activar pantalla completa">Pantalla completa</button>
+      </div>
+    </header>
+    <main>
+      <section class="slide-copy" aria-labelledby="slide-title">
+        <div class="eyebrow"><span id="chapter-number"></span><span id="chapter"></span></div>
+        <p id="slide-kicker" class="kicker"></p>
+        <h1 id="slide-title"></h1>
+        <p id="slide-description" class="description"></p>
+        <div id="slide-content"></div>
+        <div class="takeaway">
+          <span>IDEA CLAVE</span>
+          <p id="takeaway"></p>
+        </div>
+        <p id="source" class="source"></p>
+      </section>
+      <section class="visual-panel" aria-label="Diagrama interactivo de infraestructura">
+        <div class="visual-heading">
+          <span><span class="status-dot" aria-hidden="true"></span> <span id="visual-title"></span></span>
+        </div>
+        <div id="kube-viewport" aria-describedby="step-caption"></div>
+        <div class="motion-readout" hidden id="motion-readout" aria-live="off">
+          <div class="motion-readout-heading"><span id="motion-signal"></span><span id="motion-count"></span></div>
+          <strong id="motion-label"></strong>
+          <p id="motion-detail"></p>
+        </div>
+        <div class="motion-controls" role="group" aria-label="Movimiento del diagrama">
+          <button id="motion-toggle" aria-pressed="false" disabled>▶ Iniciar movimiento</button>
+          <button id="motion-once" disabled>Un recorrido</button>
+          <button id="motion-speed" aria-label="Velocidad del movimiento: 1×" disabled>1×</button>
+          <span id="motion-hint">Tráfico, luces y señales · tú marcas el ritmo</span>
+        </div>
+        <p id="scene-fallback" class="scene-fallback" hidden>
+          No se ha podido iniciar la vista 3D. El contenido y los pasos de la presentación siguen disponibles.
+        </p>
+        <div class="visual-bottom">
+          <div class="scene-caption">
+            <span id="step-label"></span>
+            <p id="step-caption"></p>
+          </div>
+          <div id="scenario-controls" class="scenario-controls" hidden>
+            <button id="scenario-reset" aria-label="Reiniciar demostración">↺</button>
+            <button id="scenario-next">Siguiente paso →</button>
+          </div>
+          <p class="orbit-hint">Arrastra para girar · Rueda para acercar</p>
+        </div>
+      </section>
+    </main>
+    <aside id="speaker-notes" aria-label="Notas del ponente" hidden></aside>
+    <footer>
+      <div class="footer-context">
+        <span class="footer-dot" aria-hidden="true"></span> DEL CÓDIGO AL CLÚSTER
+        <span class="footer-separator" aria-hidden="true">/</span>
+        <span id="footer-chapter"></span>
+      </div>
+      <nav class="navigation" aria-label="Navegación de diapositivas">
+        <button id="previous" aria-label="Diapositiva anterior">←</button>
+        <span id="slide-count" aria-live="polite"></span>
+        <button id="next" aria-label="Diapositiva siguiente">→</button>
+      </nav>
+      <span class="keyboard-hint">← → para navegar <span>·</span> F pantalla completa</span>
+      <div class="progress-track"><div id="progress"></div></div>
+    </footer>
+    <dialog id="index-dialog" aria-labelledby="index-title">
+      <div class="dialog-heading">
+        <div>
+          <p class="kicker">EL RECORRIDO</p>
+          <h2 id="index-title">Del código al clúster</h2>
+        </div>
+        <button id="close-index" aria-label="Cerrar índice">✕</button>
+      </div>
+      <nav id="slide-index" aria-label="Índice de diapositivas"></nav>
+    </dialog>
+    <p id="app-status" class="app-status" role="status" hidden></p>
+    <script type="module" src="/src/presentation/main.js"></script>
+  </body>
+</html>
