@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-// base relativa: el build funciona igual en GitHub Pages (/request-journey/) que en local
+// base relativa: el build funciona igual en GitHub Pages (/k8sptt/) que en local
 export default defineConfig({
   base: './',
   server: { port: 5192, open: false },

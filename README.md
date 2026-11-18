@@ -2,6 +2,8 @@
 
 Presentación de la **Unitat de Recursos d’Informàtica de Gestió GrupMed** para introducir Kubernetes al equipo de desarrollo, sistemas y responsables. Su base es `intro_nodos_kubernetes_grupmed.pdf`, ampliada con Jenkins, registry y observabilidad. Incluye 23 diapositivas, notas del ponente y cinco demostraciones 3D paso a paso, reutilizando los modelos y el animador del proyecto original.
 
+**Web:** https://mohacomb0.github.io/k8sptt/
+
 ```bash
 npm ci
 npm run dev
@@ -14,6 +16,18 @@ Abrir `http://localhost:5192/`. Flechas izquierda/derecha para navegar, `I` para
 **Todo es didáctico, sin conexión al clúster, Jenkins o Grafana.** La topología 3D no representa el inventario real. Esta versión pública no incluye el PDF, nombres de máquinas, versiones ni cifras del inventario interno; deben consultarse con sistemas. Prometheus se explica como backend de métricas y Loki como una opción de logs, no como una instalación confirmada.
 
 El build incluye la presentación, `presenter.html` y `laboratorio.html`, donde se conserva el simulador original. No publica el PDF fuente. El contenido nuevo está en `src/presentation/`; el simulador, los escenarios y los modelos originales se mantienen separados. Las integraciones, permisos, URLs, namespaces y procedimientos reales deben acordarse con sistemas antes de la sesión. La checklist previa al ejercicio marca como pendientes el contexto/namespace, accesos a Jenkins y registry, pipeline y aprobación, dashboard y fuentes de Grafana, backend/retención de logs y rollback. Las notas de recursos incluyen `kubectl top nodes`, `kubectl top pods -n mi-equipo` (requieren API de métricas, normalmente metrics-server) y `kubectl describe node mi-nodo`, siempre sujetos al contexto y los permisos autorizados.
+
+## Publicar mejoras
+
+Trabaja en la copia pública `k8sptt`, cuyo `origin` es `https://github.com/Mohacomb0/k8sptt.git`. Cada push a `main` ejecuta el workflow **Deploy**: comprueba la configuración de Pages, formato, lint, tests y build, y publica únicamente `dist/`. Si falla una comprobación, no se publica esa versión.
+
+```bash
+git add <archivos-revisados>
+git commit -m "Describe la mejora"
+git push origin main
+```
+
+En **Settings → Pages → Build and deployment**, la fuente debe ser **GitHub Actions**. El resultado se consulta en **Actions → Deploy**; también puede lanzarse manualmente con **Run workflow**. Mantén fuera el PDF y los datos del inventario interno al incorporar cambios desde la copia de trabajo original.
 
 ## Laboratorio original · Request Journey 3D
 
