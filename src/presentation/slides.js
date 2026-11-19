@@ -123,10 +123,10 @@ export const SLIDES = [
     ),
     takeaway: 'Kubernetes añade orquestación. Sus nodos pueden ser máquinas físicas o virtuales.',
     source: 'Guion «De Bare Metal a Kubernetes» · págs. 14–17 y 22.',
-    visual: 'cluster',
-    visualTitle: 'COORDINAR EL ESTADO DESEADO',
-    visualDescription:
-      'El plano de control coordina; los nodos ejecutan. La recuperación depende del diseño y los recursos.',
+    visual: 'layers',
+    diagram: FOUNDATION_DIAGRAMS.coordination,
+    visualTitle: 'EL RETO DE LA ORQUESTACIÓN',
+    visualDescription: 'La coordinación requiere capacidad, red y almacenamiento adecuados.',
     notes:
       'Cerrar la intervención del compañero: Compose resulta adecuado para muchos casos en un host. Kubernetes aporta coordinación multinodo, con un coste operativo que debe justificarse. No es una migración obligatoria ni reemplaza las VM. No exige Docker Engine en los nodos: utiliza runtimes compatibles. Dar paso al recorrido de Kubernetes, Jenkins, registry y observabilidad; no incorporar las demos ejecutables ni los anexos del guion a esta apertura.',
   },
@@ -147,8 +147,10 @@ export const SLIDES = [
     ),
     takeaway: 'Un contenedor es una pieza. Kubernetes coordina el conjunto.',
     source: 'Contexto adicional · kubernetes.io/docs/concepts/overview/',
-    visual: 'cluster',
-    visualTitle: 'UNA PLATAFORMA, VARIAS MÁQUINAS',
+    visual: 'layers',
+    diagram: FOUNDATION_DIAGRAMS.history,
+    visualTitle: 'DE GOOGLE A LA COMUNIDAD',
+    visualDescription: 'Kubernetes nació en Google y evolucionó como proyecto abierto dentro de la CNCF.',
     notes:
       'Presentar brevemente la diferencia entre ejecutar un contenedor y operar muchas aplicaciones. Kubernetes no exige que los nodos estén en una nube pública.',
   },

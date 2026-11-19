@@ -92,7 +92,12 @@ function render() {
   animator?.cancel();
   const slide = SLIDES[index];
   const hasDiagram = Boolean(slide.diagram);
-  document.querySelector('.visual-panel').classList.toggle('has-foundation', hasDiagram);
+  const visualPanel = document.querySelector('.visual-panel');
+  visualPanel.classList.toggle('has-foundation', hasDiagram);
+  visualPanel.setAttribute(
+    'aria-label',
+    hasDiagram ? 'Apoyo visual de la diapositiva' : 'Diagrama interactivo de infraestructura',
+  );
   $('foundation-diagram').hidden = !hasDiagram;
   $('foundation-diagram').innerHTML = slide.diagram ?? '';
   $('kube-viewport').setAttribute('aria-hidden', String(hasDiagram));
